@@ -1,174 +1,667 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>NeoSpark Solutions</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeoSpark Solutions — Automation & AI Execution</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<style>
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: linear-gradient(135deg, #0b1220, #0e1a33);
-  color: #e8edf7;
-}
+    :root {
+      --bg:        #0b0f1a;
+      --bg2:       #111827;
+      --bg3:       #1a2236;
+      --border:    rgba(255,255,255,0.07);
+      --accent:    #6366f1;
+      --accent2:   #818cf8;
+      --text:      #f1f5f9;
+      --muted:     #94a3b8;
+      --subtle:    #64748b;
+    }
 
-/* HEADER */
-.header {
-  display: flex;
-  justify-content: center;
-  padding: 30px 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-  background: rgba(0,0,0,0.25);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 1px 0 rgba(109, 211, 255, 0.1);
-}
+    html { scroll-behavior: smooth; }
 
-.header-inner {
-  width: 100%;
-  max-width: 1100px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
 
-.logo {
-  height: 72px;
-  filter: drop-shadow(0 0 12px rgba(109, 211, 255, 0.35));
-}
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(11,15,26,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: -0.2px;
+    }
+    .nav-logo img {
+      height: 36px;
+      width: auto;
+      display: block;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-cta {
+      background: var(--accent);
+      color: #fff !important;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 14px !important;
+      font-weight: 500 !important;
+      transition: background .2s, opacity .2s !important;
+    }
+    .nav-cta:hover { background: var(--accent2) !important; color: #fff !important; }
 
-.brand {
-  font-size: 1.4rem;
-  font-weight: 600;
-  letter-spacing: 0.6px;
-}
+    /* ── HERO ── */
+    .hero {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 100px 40px 80px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(99,102,241,0.12);
+      border: 1px solid rgba(99,102,241,0.3);
+      color: var(--accent2);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+      letter-spacing: 0.2px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -1.5px;
+      color: #fff;
+      margin-bottom: 24px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, #818cf8, #a5b4fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto 40px;
+      font-weight: 400;
+      line-height: 1.65;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #fff;
+      padding: 13px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-1px); }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 13px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
 
-.subtle-tag {
-  margin-left: auto;
-  font-size: 0.8rem;
-  color: #6dd3ff;
-  opacity: 0.8;
-}
 
-/* MAIN */
-.main {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: calc(100vh - 140px);
-}
+    /* ── SECTION SHELL ── */
+    section { padding: 88px 40px; }
+    .container { max-width: 1040px; margin: 0 auto; }
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent2);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(26px, 3vw, 36px);
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .section-body {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.65;
+    }
 
-.container {
-  text-align: center;
-  max-width: 400px;
-  width: 90%;
-  padding: 30px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-}
+    /* ── PROBLEMS ── */
+    .problems { background: var(--bg); }
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .problem-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+    }
+    .problem-icon {
+      width: 40px; height: 40px;
+      background: rgba(99,102,241,0.1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      margin-bottom: 16px;
+    }
+    .problem-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .problem-card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
 
-h2 {
-  font-size: 1.3rem;
-  font-weight: 500;
-  color: #a9b4c9;
-  margin-bottom: 30px;
-}
+    /* ── HOW IT WORKS ── */
+    .how { background: var(--bg2); }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0;
+      margin-top: 56px;
+      position: relative;
+    }
+    .step {
+      padding: 32px;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0; top: 52px;
+      width: 1px; height: calc(100% - 104px);
+      background: var(--border);
+    }
+    .step-num {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, #6366f1, #818cf8);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .step h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+    .step p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+    .steps-border {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
 
-/* INPUTS */
-input {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 12px;
-  border-radius: 8px;
-  border: none;
-  font-size: 1rem;
-  background: #1a243a;
-  color: #e8edf7;
-}
+    /* ── IMPACT ── */
+    .impact { background: var(--bg); }
+    .impact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin-top: 48px;
+      background: var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .impact-cell {
+      background: var(--bg2);
+      padding: 40px;
+    }
+    .impact-cell:first-child { border-radius: 16px 0 0 0; }
+    .impact-cell:nth-child(2) { border-radius: 0 16px 0 0; }
+    .impact-cell:nth-child(3) { border-radius: 0 0 0 16px; }
+    .impact-cell:last-child { border-radius: 0 0 16px 0; }
+    .impact-num {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -2px;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .impact-num span { color: var(--accent2); }
+    .impact-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .impact-context {
+      font-size: 13px;
+      color: var(--subtle);
+    }
 
-input::placeholder {
-  color: #7f8aa3;
-}
 
-/* BUTTON */
-button {
-  width: 100%;
-  padding: 12px;
-  font-size: 1rem;
-  border-radius: 8px;
-  border: none;
-  background: linear-gradient(135deg, #4fd1c5, #6366f1);
-  color: #0b1220;
-  cursor: pointer;
-  font-weight: 600;
-}
+    /* ── ABOUT ── */
+    .about { background: var(--bg); }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .about-text .section-body { max-width: none; margin-bottom: 24px; }
+    .about-text .section-body + .section-body { margin-top: 16px; }
+    .about-points { list-style: none; margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
+    .about-points li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .check {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(99,102,241,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px;
+      color: var(--accent2);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .about-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px;
+    }
+    .about-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--subtle);
+      margin-bottom: 20px;
+    }
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .profile-avatar {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #818cf8);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 20px; color: #fff;
+      flex-shrink: 0;
+    }
+    .profile-name { font-size: 17px; font-weight: 600; color: #fff; }
+    .profile-role { font-size: 13px; color: var(--muted); margin-top: 2px; }
+    .profile-bio {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+    .profile-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      background: rgba(99,102,241,0.1);
+      border: 1px solid rgba(99,102,241,0.2);
+      color: var(--accent2);
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
 
-button:hover {
-  opacity: 0.9;
-}
+    /* ── CTA ── */
+    .cta-section {
+      background: linear-gradient(135deg, #1a1f35 0%, #111827 100%);
+      border-top: 1px solid var(--border);
+    }
+    .cta-inner {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .cta-inner h2 {
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: #fff;
+      margin-bottom: 16px;
+      line-height: 1.15;
+    }
+    .cta-inner p {
+      font-size: 17px;
+      color: var(--muted);
+      margin-bottom: 36px;
+      line-height: 1.65;
+    }
+    .cta-detail {
+      font-size: 13px;
+      color: var(--subtle);
+      margin-top: 16px;
+    }
 
-.error {
-  color: #ff6b6b;
-  margin-top: 10px;
-  display: none;
-}
+    /* ── FOOTER ── */
+    footer {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 40px;
+    }
+    .footer-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-logo {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 13px;
+      color: var(--subtle);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: var(--muted); }
+    .footer-copy {
+      font-size: 13px;
+      color: var(--subtle);
+    }
 
-/* FOOTER */
-footer {
-  position: absolute;
-  bottom: 15px;
-  width: 100%;
-  text-align: center;
-  font-size: 0.85rem;
-  color: #7f8aa3;
-}
-</style>
-
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      section { padding: 64px 20px; }
+      .hero { padding: 72px 20px 56px; }
+      .impact-grid { grid-template-columns: 1fr; }
+      .impact-cell:first-child,
+      .impact-cell:nth-child(2),
+      .impact-cell:nth-child(3),
+      .impact-cell:last-child { border-radius: 0; }
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .step:not(:last-child)::after { display: none; }
+      .steps { gap: 0; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- HEADER -->
-<div class="header">
-  <div class="header-inner">
-    <img src="neospark-logo.webp" class="logo" />
-    <div class="brand">NeoSpark Solutions</div>
-    <div class="subtle-tag">Client Access</div>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <img src="logo.png" alt="NeoSpark Solutions" />
+    NeoSpark Solutions
   </div>
-</div>
+  <ul class="nav-links">
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#impact">Capabilities</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:jonathan@neosparksolutions.com" class="nav-cta">Start a Conversation</a></li>
+  </ul>
+</nav>
 
-<!-- MAIN -->
-<div class="main">
+<!-- HERO -->
+<section class="hero" style="padding-bottom:60px;">
+  <div class="hero-badge">Automation &amp; AI Execution</div>
+  <h1>Your operations should run<br/><span>faster than your strategy.</span></h1>
+  <p class="hero-sub">Most teams know what to do. Execution breaks down across systems, teams, and workflows. NeoSpark turns intent into working systems that deliver measurable results.</p>
+  <div class="hero-actions">
+    <a href="mailto:jonathan@neosparksolutions.com" class="btn-primary">Start a Conversation →</a>
+    <a href="#how" class="btn-secondary">See How It Works</a>
+  </div>
+</section>
+
+<!-- PROBLEMS -->
+<section class="problems" id="problems">
   <div class="container">
-    <h2>Client Portal</h2>
+    <p class="section-label">What slows teams down</p>
+    <h2 class="section-title">The gap between strategy and execution<br/>is almost always a systems problem.</h2>
+    <p class="section-body">It's not a lack of ideas. It's how information flows, decisions are made, and work actually gets done across teams, tools, and handoffs.</p>
 
-    <input type="text" id="username" placeholder="Username" />
-    <input type="password" id="password" placeholder="Password" />
-
-    <button onclick="login()">Login</button>
-
-    <div class="error" id="error">Invalid credentials</div>
+    <div class="problems-grid">
+      <div class="problem-card">
+        <div class="problem-icon">🔁</div>
+        <h3>Disconnected Systems</h3>
+        <p>Data lives in five places. No one has a single view of what's happening, so decisions get delayed or made on incomplete information.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">⏳</div>
+        <h3>Manual Process Drag</h3>
+        <p>High-value people spend hours on status updates, data entry, and coordination work that should be automated or eliminated entirely.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-icon">📉</div>
+        <h3>Inconsistent Execution</h3>
+        <p>Results vary across teams and quarters because processes aren't codified — what works is buried in individual habits, not in systems.</p>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="container">
+    <p class="section-label">How we work</p>
+    <h2 class="section-title">From diagnosis to measurable results<br/>in weeks, not quarters.</h2>
+    <p class="section-body">We focus on what is actually slowing execution, then design and implement systems that fix it.</p>
+
+    <div class="steps-border" style="margin-top:48px;">
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Discovery</h3>
+          <p>We map how work actually flows across teams, tools, and decisions.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Diagnosis</h3>
+          <p>We identify the highest-impact constraints and root causes.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Execution Roadmap</h3>
+          <p>We design a practical plan combining quick wins with structural improvements.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Implementation</h3>
+          <p>We build and deploy systems that automate, align, and scale execution.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="impact" id="impact">
+  <div class="container">
+    <p class="section-label">Capabilities</p>
+    <h2 class="section-title">Toolset and Capabilities</h2>
+    <p class="section-body">We leverage the right mix of AI, systems, and teams to create leverage where it matters.</p>
+
+    <div class="impact-grid">
+      <div class="impact-cell">
+        <div class="impact-num"><span>4×</span></div>
+        <div class="impact-label">Operational Throughput</div>
+        <div class="impact-context">Mid-market ops team — same headcount, 4× output after workflow redesign and automation layer</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num"><span>~80%</span></div>
+        <div class="impact-label">Reduction in Manual Effort</div>
+        <div class="impact-context">Reporting and data coordination work eliminated across a 6-person ops team</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num">Months <span>→</span> Weeks</div>
+        <div class="impact-label">Sales Cycle Compression</div>
+        <div class="impact-context">Redesigned proposal and follow-up process cut average deal cycle by 60%</div>
+      </div>
+      <div class="impact-cell">
+        <div class="impact-num" style="font-size:28px; letter-spacing:-0.5px; line-height:1.2;">Right Tool,<br/><span>Right Context</span></div>
+        <div class="impact-label" style="margin-top:12px;">Tooling Matched to Risk &amp; Reality</div>
+        <div class="impact-context">Solutions are scoped to fit — insourced or outsourced, third-party or custom-built, agentic or non-agentic — based on your environment, risk profile, and what will actually be adopted</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-text">
+        <p class="section-label">About NeoSpark</p>
+        <h2 class="section-title">Built for execution,<br/>not slide decks.</h2>
+        <p class="section-body">NeoSpark is a boutique automation and AI execution firm. We work directly with operations leaders, founders, and growth teams who are tired of recommendations that don't translate into results.</p>
+        <p class="section-body" style="margin-top:16px;">We don't hand off reports and disappear. We stay in the work until the system runs on its own.</p>
+        <ul class="about-points">
+          <li><span class="check">✓</span> Deep experience with complex, multi-system environments</li>
+          <li><span class="check">✓</span> Focus on practical implementation, not theoretical frameworks</li>
+          <li><span class="check">✓</span> Engagements scoped for outcomes — not open-ended retainers</li>
+          <li><span class="check">✓</span> Work with what you have before recommending anything new</li>
+        </ul>
+      </div>
+      <div class="about-card">
+        <div class="about-card-title">Who you'll work with</div>
+        <div class="profile">
+          <div class="profile-avatar">J</div>
+          <div>
+            <div class="profile-name">Jonathan Shank</div>
+            <div class="profile-role">Digital and Workflow Transformation Architect</div>
+          </div>
+        </div>
+        <p class="profile-bio">I work directly with leadership teams to identify where execution is breaking and to build systems that fix it.</p>
+        <p class="profile-bio" style="margin-top:12px;">My background spans IoT, manufacturing, and large-scale cross-functional delivery, with a focus on turning complex or stalled environments into systems that actually run.</p>
+        <p class="profile-bio" style="margin-top:12px;">I focus on practical execution, not theory. That means aligning how work should operate, connecting systems and teams, and implementing solutions that drive real results.</p>
+        <p class="profile-bio" style="margin-top:12px;">This is hands-on work from diagnosis through implementation.</p>
+        <div class="profile-tags">
+          <span class="tag">Workflow Automation</span>
+          <span class="tag">AI Implementation</span>
+          <span class="tag">Ops Design</span>
+          <span class="tag">Systems Thinking</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-inner">
+      <h2>Ready to close the gap<br/>between strategy and execution?</h2>
+      <p>Start with a 30-minute conversation. We'll identify the highest-leverage problem in your operation and whether we're the right fit to solve it together.</p>
+      <a href="mailto:jonathan@neosparksolutions.com" class="btn-primary" style="font-size:16px; padding:15px 28px;">
+        Schedule a Call →
+      </a>
+      <p class="cta-detail">No commitment. No sales pitch. Just a direct conversation about what's slowing you down.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-  © 2026 NeoSpark Solutions
+  <div class="footer-inner">
+    <div class="footer-logo" style="display:flex;align-items:center;gap:8px;"><img src="logo.png" alt="NeoSpark Solutions" style="height:24px;width:auto;opacity:0.7;"> NeoSpark Solutions</div>
+    <ul class="footer-links">
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#impact">Capabilities</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="mailto:jonathan@neosparksolutions.com">Contact</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 NeoSpark Solutions</p>
+  </div>
 </footer>
-
-<script>
-function login() {
-  const user = document.getElementById("username").value;
-  const pass = document.getElementById("password").value;
-
-  if (user === "client" && pass === "neospark") {
-    window.location.href = "https://neosparksentinel.com";
-  } else {
-    document.getElementById("error").style.display = "block";
-  }
-}
-</script>
 
 </body>
 </html>
